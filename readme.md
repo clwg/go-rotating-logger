@@ -2,7 +2,7 @@
 This library provides a rotating logger in Go. It creates log files that rotate based on time and line count, and compresses the old log file on rotation.
 
 
-# Usage
+## Usage
 
 Configure the logger using the LoggerConfig struct:
 
@@ -19,12 +19,14 @@ config.LoggerConfig = rotatinglogger.LoggerConfig{
 }
 ```
 
-LogDir: The directory where the log files will be stored.
-FilenamePrefix: The prefix for the log file names.
-MaxLines: The maximum number of lines that a log file can have before it's rotated.
-RotationTime: The duration after which the log file will be rotated.
+Paramters:
+- LogDir: The directory where the log files will be stored.
+- FilenamePrefix: The prefix for the log file names.
+- MaxLines: The maximum number of lines that a log file can have before it's rotated.
+- RotationTime: The duration after which the log file will be rotated.
 
-Initialize the logger
+
+Initializing the logger
 
 ```go
 logger, err := rotatinglogger.NewLogger(config)
@@ -33,7 +35,7 @@ if err != nil {
 }
 ```
 
-Log a message
+Logging a message
 
 ```go
 err := logger.Log(myObject)
