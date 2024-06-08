@@ -39,3 +39,4 @@ if err != nil {
 }
 ```
 
+See cmd/sample.go for a complete example.
