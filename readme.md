@@ -4,42 +4,38 @@ This library provides a rotating logger in Go. It creates log files that rotate 
 
 ## Usage
 
-Configure the logger using the LoggerConfig struct:
+import the library
 
-```go
+```
 import (
 	rotatinglogger "github.com/clwg/go-rotating-logger"
 )
-
-config.LoggerConfig = rotatinglogger.LoggerConfig{
-    FilenamePrefix: *filenamePrefix,
-    LogDir:         *logDir,
-    MaxLines:       *maxLines,
-    RotationTime:   time.Duration(*rotationTime) * time.Minute,
-}
 ```
 
-Paramters:
-- LogDir: The directory where the log files will be stored.
-- FilenamePrefix: The prefix for the log file names.
-- MaxLines: The maximum number of lines that a log file can have before it's rotated.
-- RotationTime: The duration after which the log file will be rotated.
-
-
-Initializing the logger
+Initialize the logger setting the file and path as well as time and line based rotation parameters.
 
 ```go
+config := rotatinglogger.LoggerConfig{
+    LogDir:         "./logs",
+    FilenamePrefix: "sample",
+    MaxLines:       100,
+    RotationTime:   time.Duration(60) * time.Minute,
+}
+
 logger, err := rotatinglogger.NewLogger(config)
 if err != nil {
-    log.Fatalf("could not create logger: %v", err)
+    fmt.Printf("Failed to create logger: %v\n", err)
+    return
 }
 ```
 
-Logging a message
+Then just call the logger to log messages
 
 ```go
-err := logger.Log(myObject)
+err := logger.Log(data)
 if err != nil {
-    log.Fatalf("could not log object: %v", err)
+    fmt.Printf("Failed to log data: %v\n", err)
+    return
 }
 ```
+
