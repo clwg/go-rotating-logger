@@ -17,6 +17,7 @@ Initialize the logger setting the file and path as well as time and line based r
 ```go
 config := rotatinglogger.LoggerConfig{
     LogDir:         "./logs",
+    LogFormat:      rotatinglogger.FormatJSON, // or rotatinglogger.FormatText
     FilenamePrefix: "sample",
     MaxLines:       100,
     RotationTime:   time.Duration(60) * time.Minute,
