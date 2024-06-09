@@ -12,7 +12,7 @@ import (
 )
 ```
 
-Initialize the logger setting the file and path as well as time and line based rotation parameters.
+Initialize the logger setting the file and path as well as time and line based rotation parameters. The LogFormat parameter can be either rotatinglogger.FormatJSON or rotatinglogger.FormatText. FormatJSON expects a struct that can be marshalled to JSON and FormatText expects a string.
 
 ```go
 config := rotatinglogger.LoggerConfig{
