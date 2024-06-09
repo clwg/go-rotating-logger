@@ -20,6 +20,7 @@ const (
 func setupTestLogger(maxLines int, rotationTime time.Duration) (*rotatinglogger.Logger, error) {
 	config := rotatinglogger.LoggerConfig{
 		LogDir:         testLogDir,
+		LogFormat:      rotatinglogger.FormatJSON,
 		FilenamePrefix: testFilenamePrefix,
 		MaxLines:       maxLines,
 		RotationTime:   rotationTime,

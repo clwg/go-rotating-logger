@@ -11,11 +11,19 @@ import (
 	"time"
 )
 
+type LogFormat int
+
+const (
+	FormatJSON LogFormat = iota
+	FormatText
+)
+
 type LoggerConfig struct {
 	LogDir         string
 	FilenamePrefix string
 	MaxLines       int
 	RotationTime   time.Duration
+	LogFormat      LogFormat
 }
 
 type Logger struct {
@@ -43,12 +51,23 @@ func (l *Logger) Log(obj interface{}) error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
-	line, err := json.Marshal(obj)
-	if err != nil {
-		return err
+	var line string
+	var err error
+
+	switch l.config.LogFormat {
+	case FormatJSON:
+		jsonLine, err := json.Marshal(obj)
+		if err != nil {
+			return err
+		}
+		line = string(jsonLine)
+	case FormatText:
+		line = fmt.Sprintf("%v", obj)
+	default:
+		return fmt.Errorf("unsupported log format")
 	}
 
-	_, err = fmt.Fprintln(l.currentFile, string(line))
+	_, err = fmt.Fprintln(l.currentFile, line)
 	if err != nil {
 		return err
 	}
