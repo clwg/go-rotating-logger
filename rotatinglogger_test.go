@@ -103,14 +103,14 @@ func TestLogger_ArchiveContent(t *testing.T) {
 		t.Fatalf("Failed to create logger: %v", err)
 	}
 
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 6; i++ {
 		err := logger.Log(map[string]string{"message": fmt.Sprintf("log entry %d", i)})
 		if err != nil {
 			t.Fatalf("Failed to log entry: %v", err)
 		}
 	}
 
-	time.Sleep(1000 * time.Millisecond) // Slight delay to ensure different timestamp in filename
+	time.Sleep(5000 * time.Millisecond) // Slight delay to ensure different timestamp in filename
 
 	archiveDir := filepath.Join(testLogDir, "archive")
 	files, err := os.ReadDir(archiveDir)
