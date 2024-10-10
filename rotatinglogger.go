@@ -120,7 +120,7 @@ func (l *Logger) rotateFile() error {
 		}
 	}
 
-	filename := fmt.Sprintf("%s_%s.log", l.config.FilenamePrefix, time.Now().Format(time.RFC3339))
+	filename := fmt.Sprintf("%s_%s.log", l.config.FilenamePrefix, time.Now().Format("2006-01-02_15-04-05"))
 	fullPath := filepath.Join(l.config.LogDir, filename)
 	file, err := os.Create(fullPath)
 	if err != nil {
